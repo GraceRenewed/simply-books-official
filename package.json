@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-app-router-with-firebase-auth",
+  "name": "simply-books",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,9 @@
     "lint": "next lint",
     "prepare": "husky",
     "pre-commit": "next lint"
+  },
+  "author": {
+    "name": "Christina Vieau"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

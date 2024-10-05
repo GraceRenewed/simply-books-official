@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default function BooksPage() {
-  return <div />;
+  return <div>books/page.js</div>;
 }

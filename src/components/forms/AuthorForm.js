@@ -73,7 +73,7 @@ function AuthorForm({ obj = initialState }) {
 
       {/* A WAY TO HANDLE UPDATES FOR TOGGLES, RADIOS, ETC  */}
       <Form.Check
-        className="text-white mb-3"
+        className="text-white mb3"
         type="switch"
         id="favorite"
         name="favorite"
@@ -82,7 +82,7 @@ function AuthorForm({ obj = initialState }) {
         onChange={(e) => {
           setFormInput((prevState) => ({
             ...prevState,
-            sale: e.target.checked,
+            favorite: e.target.checked,
           }));
         }}
       />

@@ -10,7 +10,7 @@ import { getAuthorBooks } from '../../../api/authorData';
 
 export default function ViewAuthor({ params }) {
   const [authorDetails, setAuthorDetails] = useState({});
-  const [books, setBooks] = useState({});
+  const [books, setBooks] = useState([]);
 
   // grab firebaseKey from url
   const { firebaseKey } = params;
@@ -21,7 +21,7 @@ export default function ViewAuthor({ params }) {
     getAuthorBooks(firebaseKey).then(setBooks);
   }, [firebaseKey]);
 
-  const getSpecificBooks = () => {
+  const getWrittenBooks = () => {
     getAuthorBooks(firebaseKey).then(setBooks);
   };
 
@@ -37,7 +37,7 @@ export default function ViewAuthor({ params }) {
         </h5>
         <h6>
           {books.map((book) => (
-            <BookCard key={book.firebaseKey} bookObj={book} onUpdate={getSpecificBooks} />
+            <BookCard key={book.firebaseKey} bookObj={book} onUpdate={getWrittenBooks} />
           ))}
         </h6>
       </div>

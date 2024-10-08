@@ -5,42 +5,40 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Link from 'next/link';
-import { deleteBook } from '../api/bookData';
+import { deleteSingleAuthor } from '../api/authorData';
 
-function BookCard({ bookObj, onUpdate }) {
-  // FOR DELETE, WE NEED TO REMOVE THE BOOK AND HAVE THE VIEW RERENDER,
-  // SO WE PASS THE FUNCTION FROM THE PARENT THAT GETS THE BOOKS
-  const deleteThisBook = () => {
-    if (window.confirm(`Delete ${bookObj.title}?`)) {
-      deleteBook(bookObj.firebaseKey).then(() => onUpdate());
+function AuthorCard({ authorObj, onUpdate }) {
+  // FOR DELETE, WE NEED TO REMOVE THE AUTHOR AND HAVE THE VIEW RERENDER,
+  // SO WE PASS THE FUNCTION FROM THE PARENT THAT GETS THE AUTHORS
+  const deleteThisAuthor = () => {
+    if (window.confirm(`Delete ${authorObj.last_name}?`)) {
+      deleteSingleAuthor(authorObj.firebaseKey).then(() => onUpdate());
     }
   };
 
   return (
     <Card style={{ width: '18rem', margin: '10px' }}>
-      <Card.Img variant="top" src={bookObj.image} alt={bookObj.title} style={{ height: '400px' }} />
       <Card.Body>
-        <Card.Title>{bookObj.title}</Card.Title>
+        <Card.Title>{`${authorObj.first_name} ${authorObj.last_name}`}</Card.Title>
         <p className="card-text bold">
-          {bookObj.sale && (
+          {authorObj.favorite && (
             <span>
-              SALE
+              FAVORITE
               <br />
             </span>
           )}{' '}
-          ${bookObj.price}
         </p>
-        {/* DYNAMIC LINK TO VIEW THE BOOK DETAILS  */}
-        <Link href={`/book/${bookObj.firebaseKey}`} passHref>
+        {/* DYNAMIC LINK TO VIEW THE AUTHOR DETAILS  */}
+        <Link href={`/author/${authorObj.firebaseKey}`} passHref>
           <Button variant="primary" className="m-2">
             VIEW
           </Button>
         </Link>
-        {/* DYNAMIC LINK TO EDIT THE BOOK DETAILS  */}
-        <Link href={`/book/edit/${bookObj.firebaseKey}`} passHref>
+        {/* DYNAMIC LINK TO EDIT THE AUTHOR DETAILS  */}
+        <Link href={`/author/edit/${authorObj.firebaseKey}`} passHref>
           <Button variant="info">EDIT</Button>
         </Link>
-        <Button variant="danger" onClick={deleteThisBook} className="m-2">
+        <Button variant="danger" onClick={deleteThisAuthor} className="m-2">
           DELETE
         </Button>
       </Card.Body>
@@ -48,15 +46,16 @@ function BookCard({ bookObj, onUpdate }) {
   );
 }
 
-BookCard.propTypes = {
-  bookObj: PropTypes.shape({
-    image: PropTypes.string,
-    title: PropTypes.string,
-    sale: PropTypes.bool,
-    price: PropTypes.string,
+AuthorCard.propTypes = {
+  authorObj: PropTypes.shape({
+    first_name: PropTypes.string,
+    last_name: PropTypes.string,
+    email: PropTypes.string,
+    favorite: PropTypes.bool,
+    books_id: PropTypes.string,
     firebaseKey: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
 
-export default BookCard;
+export default AuthorCard;

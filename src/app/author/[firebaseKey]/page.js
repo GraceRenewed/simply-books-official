@@ -25,7 +25,6 @@ export default function ViewAuthor({ params }) {
           {authorDetails.email}
           {authorDetails.authorObject?.favorite ? ' 🤍' : ''}
         </h5>
-        Book Details
       </div>
     </div>
   );

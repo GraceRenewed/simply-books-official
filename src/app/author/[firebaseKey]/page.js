@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { viewAuthorDetails } from '@/api/mergedData';
 import BookCard from '@/components/BookCard';
+// import { getBooksByAuthor } from '../../../api/bookData';
 import { getAuthorBooks } from '../../../api/authorData';
 
 export default function ViewAuthor({ params }) {
@@ -18,12 +19,12 @@ export default function ViewAuthor({ params }) {
   // make call to API layer to get the data
   useEffect(() => {
     viewAuthorDetails(firebaseKey).then(setAuthorDetails);
-    getAuthorBooks(firebaseKey).then(setBooks);
   }, [firebaseKey]);
 
   const getWrittenBooks = () => {
     getAuthorBooks(firebaseKey).then(setBooks);
   };
+  console.warn(getWrittenBooks);
 
   return (
     <div className="mt-5 d-flex flex-wrap">

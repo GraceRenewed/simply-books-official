@@ -1,6 +1,5 @@
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/database';
+import { initializeApp, getApps, getApp } from 'firebase/app';
+import { getAuth } from 'firebase/auth';
 
 const clientCredentials = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -12,8 +11,8 @@ const clientCredentials = {
   databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
 };
 
-if (!firebase.apps.length) {
-  firebase?.initializeApp(clientCredentials);
-}
+const firebaseApp = !getApps().length ? initializeApp(clientCredentials) : getApp();
 
-export { firebase, clientCredentials };
+const auth = getAuth(firebaseApp);
+
+export { firebaseApp, clientCredentials, auth };
